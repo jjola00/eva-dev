@@ -1,3 +1,5 @@
+import os
+
 import matplotlib.pyplot as plt
 
 LINE = "--------------------------------"
@@ -33,5 +35,15 @@ def plot_charts(dates, cumulative, country_hours, path):
     ax2.tick_params(axis="x", rotation=45)
 
     fig.tight_layout()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
     fig.savefig(path)
     plt.show()
+
+
+def print_comparison(results, winner):
+    print(LINE)
+    for country, count, total, average in results:
+        average_text = "unavailable" if average is None else f"{average:.2f} hours"
+        print(f"{country}: {count} EVAs, {total:.2f} hours total, average {average_text}")
+    print(f"Greater total duration: {winner}" if winner else "Result: tie")
+    print(LINE)
