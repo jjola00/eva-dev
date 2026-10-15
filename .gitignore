@@ -1,2 +1,3 @@
 images/*
 *.docx
+__pycache__/
